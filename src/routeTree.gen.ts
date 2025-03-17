@@ -11,15 +11,29 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TripLuggageCheckImport } from './routes/tripLuggageCheck'
 import { Route as StepsImport } from './routes/steps'
+import { Route as DateCounterImport } from './routes/dateCounter'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
+const TripLuggageCheckRoute = TripLuggageCheckImport.update({
+  id: '/tripLuggageCheck',
+  path: '/tripLuggageCheck',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const StepsRoute = StepsImport.update({
   id: '/steps',
   path: '/steps',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DateCounterRoute = DateCounterImport.update({
+  id: '/dateCounter',
+  path: '/dateCounter',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,11 +67,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/dateCounter': {
+      id: '/dateCounter'
+      path: '/dateCounter'
+      fullPath: '/dateCounter'
+      preLoaderRoute: typeof DateCounterImport
+      parentRoute: typeof rootRoute
+    }
     '/steps': {
       id: '/steps'
       path: '/steps'
       fullPath: '/steps'
       preLoaderRoute: typeof StepsImport
+      parentRoute: typeof rootRoute
+    }
+    '/tripLuggageCheck': {
+      id: '/tripLuggageCheck'
+      path: '/tripLuggageCheck'
+      fullPath: '/tripLuggageCheck'
+      preLoaderRoute: typeof TripLuggageCheckImport
       parentRoute: typeof rootRoute
     }
   }
@@ -68,41 +96,57 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dateCounter': typeof DateCounterRoute
   '/steps': typeof StepsRoute
+  '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dateCounter': typeof DateCounterRoute
   '/steps': typeof StepsRoute
+  '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dateCounter': typeof DateCounterRoute
   '/steps': typeof StepsRoute
+  '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/steps'
+  fullPaths: '/' | '/about' | '/dateCounter' | '/steps' | '/tripLuggageCheck'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/steps'
-  id: '__root__' | '/' | '/about' | '/steps'
+  to: '/' | '/about' | '/dateCounter' | '/steps' | '/tripLuggageCheck'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/dateCounter'
+    | '/steps'
+    | '/tripLuggageCheck'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DateCounterRoute: typeof DateCounterRoute
   StepsRoute: typeof StepsRoute
+  TripLuggageCheckRoute: typeof TripLuggageCheckRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DateCounterRoute: DateCounterRoute,
   StepsRoute: StepsRoute,
+  TripLuggageCheckRoute: TripLuggageCheckRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +161,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/steps"
+        "/dateCounter",
+        "/steps",
+        "/tripLuggageCheck"
       ]
     },
     "/": {
@@ -126,8 +172,14 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
+    "/dateCounter": {
+      "filePath": "dateCounter.tsx"
+    },
     "/steps": {
       "filePath": "steps.tsx"
+    },
+    "/tripLuggageCheck": {
+      "filePath": "tripLuggageCheck.tsx"
     }
   }
 }
