@@ -16,7 +16,7 @@ function Steps() {
 
   function changeSteps(operation: "previous" | "next") {
     if (operation == "previous") {
-      if (currentStep > 1) setCurrentStep((s) => s - 1);
+      if (currentStep >= 1) setCurrentStep((s) => s - 1);
     }
     if (operation == "next") {
       if (currentStep < 3) setCurrentStep((s) => s + 1);
@@ -51,11 +51,7 @@ function ShowSteps({
       <div className="flex flex-row justify-center">
         {stepList.map((e) => {
           return (
-            <div
-              className={
-                "mx-2 " + (e.position <= currentStep ? "text-red-800" : "")
-              }
-            >
+            <div className={"mx-2 " + (e.position <= currentStep ? "text-red-800 font-bold" : "")}>
               {e.position.toString()}
             </div>
           );
