@@ -13,7 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as TripLuggageCheckImport } from './routes/tripLuggageCheck'
 import { Route as StepsImport } from './routes/steps'
+import { Route as EatnsplitImport } from './routes/eatnsplit'
 import { Route as DateCounterImport } from './routes/dateCounter'
+import { Route as AccordionImport } from './routes/accordion'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
@@ -31,9 +33,21 @@ const StepsRoute = StepsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const EatnsplitRoute = EatnsplitImport.update({
+  id: '/eatnsplit',
+  path: '/eatnsplit',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const DateCounterRoute = DateCounterImport.update({
   id: '/dateCounter',
   path: '/dateCounter',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccordionRoute = AccordionImport.update({
+  id: '/accordion',
+  path: '/accordion',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,11 +81,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/accordion': {
+      id: '/accordion'
+      path: '/accordion'
+      fullPath: '/accordion'
+      preLoaderRoute: typeof AccordionImport
+      parentRoute: typeof rootRoute
+    }
     '/dateCounter': {
       id: '/dateCounter'
       path: '/dateCounter'
       fullPath: '/dateCounter'
       preLoaderRoute: typeof DateCounterImport
+      parentRoute: typeof rootRoute
+    }
+    '/eatnsplit': {
+      id: '/eatnsplit'
+      path: '/eatnsplit'
+      fullPath: '/eatnsplit'
+      preLoaderRoute: typeof EatnsplitImport
       parentRoute: typeof rootRoute
     }
     '/steps': {
@@ -96,7 +124,9 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accordion': typeof AccordionRoute
   '/dateCounter': typeof DateCounterRoute
+  '/eatnsplit': typeof EatnsplitRoute
   '/steps': typeof StepsRoute
   '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
@@ -104,7 +134,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accordion': typeof AccordionRoute
   '/dateCounter': typeof DateCounterRoute
+  '/eatnsplit': typeof EatnsplitRoute
   '/steps': typeof StepsRoute
   '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
@@ -113,21 +145,39 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accordion': typeof AccordionRoute
   '/dateCounter': typeof DateCounterRoute
+  '/eatnsplit': typeof EatnsplitRoute
   '/steps': typeof StepsRoute
   '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/dateCounter' | '/steps' | '/tripLuggageCheck'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/accordion'
+    | '/dateCounter'
+    | '/eatnsplit'
+    | '/steps'
+    | '/tripLuggageCheck'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/dateCounter' | '/steps' | '/tripLuggageCheck'
+  to:
+    | '/'
+    | '/about'
+    | '/accordion'
+    | '/dateCounter'
+    | '/eatnsplit'
+    | '/steps'
+    | '/tripLuggageCheck'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/accordion'
     | '/dateCounter'
+    | '/eatnsplit'
     | '/steps'
     | '/tripLuggageCheck'
   fileRoutesById: FileRoutesById
@@ -136,7 +186,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccordionRoute: typeof AccordionRoute
   DateCounterRoute: typeof DateCounterRoute
+  EatnsplitRoute: typeof EatnsplitRoute
   StepsRoute: typeof StepsRoute
   TripLuggageCheckRoute: typeof TripLuggageCheckRoute
 }
@@ -144,7 +196,9 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccordionRoute: AccordionRoute,
   DateCounterRoute: DateCounterRoute,
+  EatnsplitRoute: EatnsplitRoute,
   StepsRoute: StepsRoute,
   TripLuggageCheckRoute: TripLuggageCheckRoute,
 }
@@ -161,7 +215,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/accordion",
         "/dateCounter",
+        "/eatnsplit",
         "/steps",
         "/tripLuggageCheck"
       ]
@@ -172,8 +228,14 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
+    "/accordion": {
+      "filePath": "accordion.tsx"
+    },
     "/dateCounter": {
       "filePath": "dateCounter.tsx"
+    },
+    "/eatnsplit": {
+      "filePath": "eatnsplit.tsx"
     },
     "/steps": {
       "filePath": "steps.tsx"

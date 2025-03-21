@@ -20,6 +20,12 @@ export const Route = createRootRoute({
         <Link to="/tripLuggageCheck" className="[&.active]:font-bold">
           Trip Luggage Check
         </Link>
+        <Link to="/accordion" className="[&.active]:font-bold">
+          Accordion
+        </Link>
+        <Link to="/eatnsplit" className="[&.active]:font-bold">
+          Eat N Split
+        </Link>
       </div>
       <hr />
       <Outlet />

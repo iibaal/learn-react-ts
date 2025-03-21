@@ -29,9 +29,24 @@ interface LuggageItem {
 
 function tripLuggageCheck() {
   const [luggageList, setLuggageList] = useState<LuggageItem[]>([
-    { quantity: 5, luggageName: "Motor", isReady: false, timestamp: new Date() },
-    { quantity: 1, luggageName: "Sepeda", isReady: false, timestamp: new Date() },
-    { quantity: 2, luggageName: "Kunci", isReady: false, timestamp: new Date() },
+    {
+      quantity: 5,
+      luggageName: "Motor",
+      isReady: false,
+      timestamp: new Date(),
+    },
+    {
+      quantity: 1,
+      luggageName: "Sepeda",
+      isReady: false,
+      timestamp: new Date(),
+    },
+    {
+      quantity: 2,
+      luggageName: "Kunci",
+      isReady: false,
+      timestamp: new Date(),
+    },
   ]);
   const [sortType, setSortType] = useState<string>("inputorder");
 
@@ -61,20 +76,29 @@ function tripLuggageCheck() {
     const timestamp = new Date();
 
     // set data
-    const data = { quantity: parseInt(quantity), luggageName, isReady: false, timestamp };
+    const data = {
+      quantity: parseInt(quantity),
+      luggageName,
+      isReady: false,
+      timestamp,
+    };
 
     setLuggageList([...luggageList, data]);
   }
 
   function deleteLuggage(luggageName: string) {
-    const filteredLuggageList = luggageList.filter((e) => e.luggageName != luggageName);
+    const filteredLuggageList = luggageList.filter(
+      (e) => e.luggageName != luggageName
+    );
     setLuggageList(filteredLuggageList);
   }
 
   function handleCheckbox(luggageName: string) {
     setLuggageList((prevItems) =>
       prevItems.map((item, i) =>
-        item.luggageName === luggageName ? { ...item, isReady: !item.isReady } : item
+        item.luggageName === luggageName
+          ? { ...item, isReady: !item.isReady }
+          : item
       )
     );
   }
@@ -83,7 +107,11 @@ function tripLuggageCheck() {
     {
       return luggageList.length > 0
         ? luggageList.map((e) => (
-            <ListItem item={e} buttonCallback={deleteLuggage} checkboxCallback={handleCheckbox} />
+            <ListItem
+              item={e}
+              buttonCallback={deleteLuggage}
+              checkboxCallback={handleCheckbox}
+            />
           ))
         : "List is Empty :)";
     }
@@ -177,7 +205,10 @@ function ListItem({
         {item.quantity} {item.luggageName} {item.timestamp.getMinutes()}:
         {item.timestamp.getSeconds()}
       </span>
-      <button className="text-red-700" onClick={() => buttonCallback(item.luggageName)}>
+      <button
+        className="text-red-700"
+        onClick={() => buttonCallback(item.luggageName)}
+      >
         Delete
       </button>
     </div>
