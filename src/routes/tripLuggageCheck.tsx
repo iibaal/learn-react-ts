@@ -29,9 +29,24 @@ interface LuggageItem {
 
 function TripLuggageChecker() {
   const [luggageList, setLuggageList] = useState<LuggageItem[]>([
-    { quantity: 5, luggageName: "Motor", isReady: false, timestamp: new Date() },
-    { quantity: 1, luggageName: "Sepeda", isReady: false, timestamp: new Date() },
-    { quantity: 2, luggageName: "Kunci", isReady: false, timestamp: new Date() },
+    {
+      quantity: 5,
+      luggageName: "Motor",
+      isReady: false,
+      timestamp: new Date(),
+    },
+    {
+      quantity: 1,
+      luggageName: "Sepeda",
+      isReady: false,
+      timestamp: new Date(),
+    },
+    {
+      quantity: 2,
+      luggageName: "Kunci",
+      isReady: false,
+      timestamp: new Date(),
+    },
   ]);
   const [sortType, setSortType] = useState<string>("inputorder");
 
@@ -114,6 +129,36 @@ function TripLuggageChecker() {
 
   function Header() {
     return <>Trip Checker</>;
+  }
+  function deleteLuggage(luggageName: string) {
+    const filteredLuggageList = luggageList.filter(
+      (e) => e.luggageName != luggageName
+    );
+    setLuggageList(filteredLuggageList);
+  }
+
+  function handleCheckbox(luggageName: string) {
+    setLuggageList((prevItems) =>
+      prevItems.map((item, i) =>
+        item.luggageName === luggageName
+          ? { ...item, isReady: !item.isReady }
+          : item
+      )
+    );
+  }
+
+  function RenderLuggageList() {
+    {
+      return luggageList.length > 0
+        ? luggageList.map((e) => (
+            <ListItem
+              item={e}
+              buttonCallback={deleteLuggage}
+              checkboxCallback={handleCheckbox}
+            />
+          ))
+        : "List is Empty :)";
+    }
   }
 
   return (
