@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as TripLuggageCheckImport } from './routes/tripLuggageCheck'
 import { Route as StepsImport } from './routes/steps'
+import { Route as FlashCardImport } from './routes/flashCard'
 import { Route as DateCounterImport } from './routes/dateCounter'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
@@ -28,6 +29,12 @@ const TripLuggageCheckRoute = TripLuggageCheckImport.update({
 const StepsRoute = StepsImport.update({
   id: '/steps',
   path: '/steps',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FlashCardRoute = FlashCardImport.update({
+  id: '/flashCard',
+  path: '/flashCard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DateCounterImport
       parentRoute: typeof rootRoute
     }
+    '/flashCard': {
+      id: '/flashCard'
+      path: '/flashCard'
+      fullPath: '/flashCard'
+      preLoaderRoute: typeof FlashCardImport
+      parentRoute: typeof rootRoute
+    }
     '/steps': {
       id: '/steps'
       path: '/steps'
@@ -97,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/dateCounter': typeof DateCounterRoute
+  '/flashCard': typeof FlashCardRoute
   '/steps': typeof StepsRoute
   '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
@@ -105,6 +120,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/dateCounter': typeof DateCounterRoute
+  '/flashCard': typeof FlashCardRoute
   '/steps': typeof StepsRoute
   '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
@@ -114,20 +130,34 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/dateCounter': typeof DateCounterRoute
+  '/flashCard': typeof FlashCardRoute
   '/steps': typeof StepsRoute
   '/tripLuggageCheck': typeof TripLuggageCheckRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/dateCounter' | '/steps' | '/tripLuggageCheck'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/dateCounter'
+    | '/flashCard'
+    | '/steps'
+    | '/tripLuggageCheck'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/dateCounter' | '/steps' | '/tripLuggageCheck'
+  to:
+    | '/'
+    | '/about'
+    | '/dateCounter'
+    | '/flashCard'
+    | '/steps'
+    | '/tripLuggageCheck'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/dateCounter'
+    | '/flashCard'
     | '/steps'
     | '/tripLuggageCheck'
   fileRoutesById: FileRoutesById
@@ -137,6 +167,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   DateCounterRoute: typeof DateCounterRoute
+  FlashCardRoute: typeof FlashCardRoute
   StepsRoute: typeof StepsRoute
   TripLuggageCheckRoute: typeof TripLuggageCheckRoute
 }
@@ -145,6 +176,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   DateCounterRoute: DateCounterRoute,
+  FlashCardRoute: FlashCardRoute,
   StepsRoute: StepsRoute,
   TripLuggageCheckRoute: TripLuggageCheckRoute,
 }
@@ -162,6 +194,7 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/dateCounter",
+        "/flashCard",
         "/steps",
         "/tripLuggageCheck"
       ]
@@ -174,6 +207,9 @@ export const routeTree = rootRoute
     },
     "/dateCounter": {
       "filePath": "dateCounter.tsx"
+    },
+    "/flashCard": {
+      "filePath": "flashCard.tsx"
     },
     "/steps": {
       "filePath": "steps.tsx"
